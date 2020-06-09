@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,15 +17,13 @@ namespace LoremIpsumAndBBC
     [Binding]
     public class BBCSteps
     {
-        private const string bbcNewsPageUrl = "https://www.bbc.com/news";
-        private const string bbcSearchPageUrl = "https://www.bbc.co.uk/search?q={0}";
-
-        BBCNewsPage bbcNewsPage = new BBCNewsPage(bbcNewsPageUrl);
+        BBCNewsPage bbcNewsPage = new BBCNewsPage(ConfigurationManager.AppSettings["BBCNewsPageUrl"]);
 
         [When(@"I Get the Html Document from (BBC News Page|BBC Search Page) \$")]
         public HtmlDocument GetHtmlDocument(string page)
         {
-            BBCSearchPage bbcSearchPage = new BBCSearchPage(bbcSearchPageUrl, bbcNewsPage.HeadlineArticleCategory);
+            BBCSearchPage bbcSearchPage = new BBCSearchPage(ConfigurationManager.AppSettings["BBCSearchPageUrl"], 
+                bbcNewsPage.HeadlineArticleCategory);
             switch (page)
             {
                 case "BBC News Page":
@@ -32,7 +31,6 @@ namespace LoremIpsumAndBBC
                 case "BBC Search Page":
                     return bbcSearchPage.HtmlDocument;
                 default:
-                    return null;
                     throw new System.NullReferenceException("The html document was not received");
             }
         }
@@ -61,7 +59,8 @@ namespace LoremIpsumAndBBC
         [Then(@"The First Article Title in Category Search Results List is (.*)")]
         public void CheckFirstArticleTitle(string expectedFirstArticleTitle)
         {
-            BBCSearchPage bbcSearchPage = new BBCSearchPage(bbcSearchPageUrl, bbcNewsPage.HeadlineArticleCategory);
+            BBCSearchPage bbcSearchPage = new BBCSearchPage(ConfigurationManager.AppSettings["BBCSearchPageUrl"], 
+                bbcNewsPage.HeadlineArticleCategory);
             string actualFirstArticleTitle = bbcSearchPage.FirstArticleTitle;
             Assert.AreEqual(expectedFirstArticleTitle, actualFirstArticleTitle);
         }

@@ -23,24 +23,14 @@ Scenario Outline: Populate Feedback with Data and Take Screenshot
 	When I select Comment on BBC Website Category
 	And I Generate <Text Size> Text at BaseballIpsum site $
 	And I Populate Comment with <Text Size> Feedback $
-	| Url            | Subject   | Is Confirmation Letter Needed |
-	| www.google.com | Some shit | false                         |
+	| Url            | Subject						| Is Confirmation Letter Needed |
+	| www.google.com | Some very important comment  | false                         |
 	Then Generated and Submitted Text Lengths are equal: <text lengths are equal> $
 	And I Take a Screenshot
 	Examples:
 	| Text Size      | text lengths are equal |
 	| Properly Sized | true                   |
 	| Too Long       | false                  |
-
-#Scenario: Populate Feedback with Too Long Text and Take Screenshot 
-#	Given I am on Contact BBC page
-#	When I select Comment on BBC Website Category
-#	And I Generate Too Long Text at BaseballIpsum site $
-#	And I Populate Comment with Too Long Feedback $
-#	| Url            | Subject   | Is Confirmation Letter Needed |
-#	| www.google.com | Some shit | true                          |
-#	Then Generated and Submitted Text Lengths are equal: false $
-#	And I Take a Screenshot
 
 Scenario: Populate Feedback with Incorrect Data and Get Error Message 
 	Given I am on Contact BBC page

@@ -54,7 +54,7 @@ namespace LoremIpsumAndBBC
             if (condition == "true")            
                 Assert.IsTrue(generatedTextLength.Equals(submittedTextLength));            
             else           
-                Assert.IsTrue(!generatedTextLength.Equals(submittedTextLength));            
+                Assert.IsFalse(generatedTextLength.Equals(submittedTextLength));            
         }
 
         [Then(@"I Take a Screenshot")]

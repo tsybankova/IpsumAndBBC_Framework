@@ -254,7 +254,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Is Confirmation Letter Needed"});
                 table2.AddRow(new string[] {
                             "www.google.com",
-                            "Some shit",
+                            "Some very important comment",
                             "false"});
 #line 25
  testRunner.And(string.Format("I Populate Comment with {0} Feedback $", textSize), ((string)(null)), table2, "And ");
@@ -302,7 +302,7 @@ this.PopulateFeedbackWithDataAndTakeScreenshot("Too Long", "false", ((string[])(
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Populate Feedback with Incorrect Data and Get Error Message", null, ((string[])(null)));
-#line 45
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -322,13 +322,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 46
+#line 36
  testRunner.Given("I am on Contact BBC page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 47
+#line 37
  testRunner.When("I select Comment on BBC Website Category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 48
+#line 38
  testRunner.And("I Generate Properly Sized Text at BaseballIpsum site $", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -339,10 +339,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "www.google.com",
                             "",
                             "true"});
-#line 49
+#line 39
  testRunner.And("I Submit Comment with Some Empty Fields", ((string)(null)), table3, "And ");
 #line hidden
-#line 52
+#line 42
  testRunner.Then("Error Banner is Displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

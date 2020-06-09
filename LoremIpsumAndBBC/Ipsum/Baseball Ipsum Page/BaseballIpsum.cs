@@ -15,12 +15,12 @@ namespace LoremIpsumAndBBC.LoremIpsum_Page
         public string GetRequestUri(string baseUrl, int numOFParagraphs) => 
             $"{baseUrl}api/?paras={numOFParagraphs}";
 
-        public WebRequest GetRequest(string baseUrl, int numOFParagraphs, string method)
+        public WebRequest GetRequest(string baseUrl, int numOFParagraphs, string method, string contentType = "application/json")
         {
             string uri = GetRequestUri(baseUrl, numOFParagraphs);
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(uri);
             httpRequest.Method = method;
-            httpRequest.ContentType = "application/json";
+            httpRequest.ContentType = contentType;
             return httpRequest;
         }
 
@@ -39,6 +39,7 @@ namespace LoremIpsumAndBBC.LoremIpsum_Page
         public string GetText(string baseUrl, int numOFParagraphs, string method = "Get")
         {
             string text = GetResponse(GetRequest(baseUrl, numOFParagraphs, method));
+            // because it is not a JSON object actually and string needs to be filtered
             text = text.Remove(text.Length - 2).Remove(0, 2).Replace("\",\"", " ").Replace("\\u0027", "'");
             return text;
         }

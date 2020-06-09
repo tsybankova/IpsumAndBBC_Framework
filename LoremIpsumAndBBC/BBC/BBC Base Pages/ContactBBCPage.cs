@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,6 @@ namespace LoremIpsumAndBBC.BBC
         }
 
         private static IWebDriver driver = WebDriverSingleton.getInstance();
-        private const string ScreenshotLocation = "C:\\Users\\tsyba\\OneDrive\\Desktop\\BBCTestScreenshot{0}.png";
 
         [FindsBy(How = How.XPath, Using = "//*[contains(text(), 'Submit a comment')]")]
         private IWebElement SubmitComentBtn;
@@ -111,17 +111,9 @@ namespace LoremIpsumAndBBC.BBC
 
         public void ChooseWhetherReceiveConfirmationEmail(bool condition)
         {
-            switch (condition)
-            {
-                case true:
-                    ElementClickable(2000, ReceiveConfirmationLetterOnFeedback);
-                    ReceiveConfirmationLetterOnFeedback.Click();
-                    break;
-                case false:
-                    ElementClickable(2000, DoNotReceiveConfirmationLetterOnFeedback);
-                    DoNotReceiveConfirmationLetterOnFeedback.Click();
-                    break;
-            }
+            var button = condition ? ReceiveConfirmationLetterOnFeedback : DoNotReceiveConfirmationLetterOnFeedback;
+            ElementClickable(2000, button);
+            button.Click();                                       
         }
 
         public void ClickContinueBtn()
@@ -135,7 +127,8 @@ namespace LoremIpsumAndBBC.BBC
         public void TakeScreenShot()
         {
             Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
-            ss.SaveAsFile(String.Format(ScreenshotLocation, new Random().Next(99)), ScreenshotImageFormat.Png);
+            ss.SaveAsFile(String.Format(ConfigurationManager.AppSettings["ScreenshotLocation"], 
+                new Random().Next(99)), ScreenshotImageFormat.Png);
         }
     }
 }

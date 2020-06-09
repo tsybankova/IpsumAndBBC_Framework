@@ -23,12 +23,12 @@ namespace LoremIpsumAndBBC.BBC_Base_Pages
         public HtmlDocument GetHtmlDoc() =>
             new HtmlWeb().Load(Url);
 
-        //is not usedб but I wanted to keep it
-        public WebRequest GetRequest(string uri, string method)
+        //is not used, but I wanted to keep it
+        public WebRequest GetRequest(string uri, string method, string contentType = "text/html")
         {
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(uri);
             httpRequest.Method = method;
-            httpRequest.ContentType = "text/html";
+            httpRequest.ContentType = contentType;
             return httpRequest;
         }
 
